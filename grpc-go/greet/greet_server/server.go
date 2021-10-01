@@ -5,6 +5,9 @@ import (
 	"log"
 	"net"
 
+	"github.com/ashokraj1978/grpc-go/grpc-go/greet/greetpd"
+	"github.com/ashokraj1978/grpc-go/tree/main/grpc-go/greet/greetpd"
+
 	grpc "google.golang.org/grpc"
 )
 
@@ -17,5 +20,8 @@ func main() {
 		log.Fatalf("cannot listn", err)
 	}
 	s := grpc.NewServer()
-	greetpd.
+	greetpd.RegisterGreetServiceServer(s, &server{})
+	if err := s.Serve(lis); err != nil {
+		log.Fatalf("failed to server %v ", err)
+	}
 }

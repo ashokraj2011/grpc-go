@@ -57,5 +57,5 @@ var GreetService_ServiceDesc = grpc.ServiceDesc{
 	HandlerType: (*GreetServiceServer)(nil),
 	Methods:     []grpc.MethodDesc{},
 	Streams:     []grpc.StreamDesc{},
-	Metadata:    "greet/greetpd/greet.proto",
+	Metadata:    "greet.proto",
 }
