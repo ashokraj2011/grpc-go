@@ -5,6 +5,7 @@ go 1.17
 require google.golang.org/grpc v1.39.1
 
 require (
+	github.com/ashokraj1978/grpc-go v0.0.0-20210930120236-8b168f3055a4 // indirect
 	github.com/golang/protobuf v1.4.3 // indirect
 	golang.org/x/net v0.0.0-20200822124328-c89045814202 // indirect
 	golang.org/x/sys v0.0.0-20200323222414-85ca7c5b95cd // indirect

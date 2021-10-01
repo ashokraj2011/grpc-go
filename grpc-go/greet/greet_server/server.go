@@ -6,7 +6,6 @@ import (
 	"net"
 
 	"github.com/ashokraj1978/grpc-go/grpc-go/greet/greetpd"
-	"github.com/ashokraj1978/grpc-go/tree/main/grpc-go/greet/greetpd"
 
 	grpc "google.golang.org/grpc"
 )
@@ -17,7 +16,7 @@ func main() {
 	fmt.Println("hai")
 	lis, err := net.Listen("tcp", "0.0.0.0:50051")
 	if err != nil {
-		log.Fatalf("cannot listn", err)
+		fmt.Print("error")
 	}
 	s := grpc.NewServer()
 	greetpd.RegisterGreetServiceServer(s, &server{})
