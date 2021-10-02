@@ -1,26 +1,38 @@
 package main
 
 import (
-	"fmt"
+	"context"
 	"log"
 	"net"
 
 	"github.com/ashokraj1978/grpc-go/grpc-go/greet/greetpd"
-
 	grpc "google.golang.org/grpc"
 )
 
-type server struct{}
+const (
+	port = ":50051"
+)
+
+// server is used to implement helloworld.GreeterServer.
+type server struct {
+	//pb.UnimplementedGreeterServer
+}
+
+// SayHello implements helloworld.GreeterServer
+func (s *server) SayHello(ctx context.Context, in *greetpd.HelloRequest) (*greetpd.HelloReply, error) {
+	log.Printf("Received: %v", in.GetName())
+	return &greetpd.HelloReply{Message: "Hello " + in.GetName()}, nil
+}
 
 func main() {
-	fmt.Println("hai")
-	lis, err := net.Listen("tcp", "0.0.0.0:50051")
+	lis, err := net.Listen("tcp", port)
 	if err != nil {
-		fmt.Print("error")
+		log.Fatalf("failed to listen: %v", err)
 	}
 	s := grpc.NewServer()
-	greetpd.RegisterGreetServiceServer(s, &server{})
+	greetpd.RegisterGreeterServer(s, &server{})
+	log.Printf("server listening at %v", lis.Addr())
 	if err := s.Serve(lis); err != nil {
-		log.Fatalf("failed to server %v ", err)
+		log.Fatalf("failed to serve: %v", err)
 	}
 }
